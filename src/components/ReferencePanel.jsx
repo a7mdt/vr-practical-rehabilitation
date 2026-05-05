@@ -37,6 +37,42 @@ const exerciseConfig = {
       'Push into the stretch at the end',
       'Extend fully between repetitions'
     ]
+  },
+  clamshell: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Lie on your side with hips and knees stacked',
+      'Keep your feet together throughout the movement',
+      'Rotate your top knee toward the ceiling slowly',
+      'Do not let your hips roll backward'
+    ]
+  },
+  deadBug: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Keep your lower back pressed firmly to the floor',
+      'Lower opposite arm and leg together slowly',
+      'Breathe out steadily during the lowering phase',
+      'Return to start position with control'
+    ]
+  },
+  singleLegStand: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Lift one knee to hip height and hold for 2 seconds',
+      'Keep your trunk upright — do not lean sideways',
+      'Focus your gaze on a fixed point ahead of you',
+      'Engage your core and standing hip for stability'
+    ]
+  },
+  catCamel: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Start on hands and knees with a neutral spine',
+      'Round your spine up toward the ceiling (Cat)',
+      'Arch your spine down and lift your head (Camel)',
+      'Move slowly through the full range of motion'
+    ]
   }
 };
 
