@@ -76,6 +76,8 @@ export default function App() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
+    // Reset internal state of the previous exercise (if it has a reset method)
+    if (currentExerciseRef.current?.reset) currentExerciseRef.current.reset();
     currentExerciseRef.current = getExercise(selectedExerciseId);
     resetSession();
   }, [selectedExerciseId]); // eslint-disable-line
