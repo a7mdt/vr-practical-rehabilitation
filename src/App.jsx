@@ -289,13 +289,15 @@ export default function App() {
   };
 
   const resetSession = () => {
+    currentExerciseRef.current?.reset?.();
     repsRef.current = 0;
     stageRef.current = 'UP';
     startTimeRef.current = null;
     peakAngleRef.current = null;
     prevAngleRef.current = null;
     smoothedAngleRef.current = null;
-    baselineAngleRef.current = 165;
+    const cfg = ROM_CONFIG[currentExerciseRef.current?.id];
+    baselineAngleRef.current = cfg?.startAngle ?? 165;
     feedbackRef.current = { text: 'Ready to start', type: 'neutral' };
     setReps(0);
     setFeedback({ text: 'Ready to start', type: 'neutral' });

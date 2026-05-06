@@ -109,6 +109,24 @@ const exerciseConfig = {
       'Squeeze your glutes at the top of the movement',
       'Keep your knees aligned over your ankles throughout'
     ]
+  },
+  quadSets: {
+    videoId: 'khUhNAq2Fzo',
+    tips: [
+      'Lie flat with your leg fully extended on the surface',
+      'Tighten your thigh muscle — press the back of your knee toward the floor',
+      'Hold the contraction for 5–10 seconds',
+      'Relax slowly, then repeat'
+    ]
+  },
+  straightLegRaise: {
+    videoId: 'U4L_6JEv9Jg',
+    tips: [
+      'Lie flat — bend the opposite knee for back support',
+      'Tighten your thigh to lock the knee fully straight before lifting',
+      'Raise your leg to roughly 45° (level with the opposite knee)',
+      'Lower slowly and under control — do not drop the leg'
+    ]
   }
 };
 
@@ -132,7 +150,7 @@ export default function ReferencePanel({ exerciseId }) {
         <div className="demo-video-container">
           {config.videoId ? (
             <iframe
-              src={`https://www.youtube.com/embed/${config.videoId}?controls=0&modestbranding=1&rel=0`}
+              src={`https://www.youtube-nocookie.com/embed/${config.videoId}?rel=0&modestbranding=1`}
               title="Exercise Demo"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

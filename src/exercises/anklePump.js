@@ -56,8 +56,8 @@ export default {
       }
     }
 
-    // Plantarflexion / neutral return — angle rises back above 160°
-    if (ankleAngle > 160) {
+    // Plantarflexion / neutral return — angle rises back above 155°
+    if (ankleAngle > 155) {
       if (stage === 'DOWN') {
         isGoodRep = true;
         feedback = { text: 'Full cycle complete!', type: 'good' };

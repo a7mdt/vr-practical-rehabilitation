@@ -10,6 +10,8 @@ import catCamel from './catCamel';
 import birdDog from './birdDog';
 import pendulum from './pendulum';
 import bridge from './bridge';
+import quadSets from './quadSets';
+import straightLegRaise from './straightLegRaise';
 
 export const exercises = {
   squats,
@@ -23,7 +25,9 @@ export const exercises = {
   catCamel,
   birdDog,
   pendulum,
-  bridge
+  bridge,
+  quadSets,
+  straightLegRaise
 };
 
 export const getExercise = (id) => exercises[id] || exercises.squats;
