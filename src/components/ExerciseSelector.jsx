@@ -60,7 +60,7 @@ export default function ExerciseSelector({ selectedExercise, onSelect }) {
             className="absolute z-[100] top-full left-0 w-full bg-white border border-black/8 rounded-2xl shadow-2xl overflow-hidden py-2"
           >
             <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
-            {Object.values(exercises).map((ex) => {
+            {Object.values(exercises).filter(ex => ex.id !== 'deadBug' && ex.id !== 'birdDog').map((ex) => {
               const isSelected = ex.id === selectedExercise;
               return (
                 <button

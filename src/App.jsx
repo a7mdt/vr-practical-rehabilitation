@@ -12,7 +12,7 @@ import {
 import { drawSkeleton } from "./utils/canvasDrawing";
 import { ROM_CONFIG, computeROMScore } from "./utils/romConfig";
 
-import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, ChevronLeft, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle } from "lucide-react";
+import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, ChevronLeft, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle, Lock } from "lucide-react";
 
 
 
@@ -739,25 +739,42 @@ export default function App() {
                         {pageExercises.map((ex, localIdx) => {
                           const globalIdx = sliderPage * perPage + localIdx;
                           const isSelected = selectedExerciseId === ex.id;
+                          const isLocked = ex.id === 'deadBug' || ex.id === 'birdDog';
                           const numStr = `${globalIdx + 1}`;
                           return (
                             <motion.div
                               key={ex.id}
-                              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setSelectedExerciseId(ex.id)}
-                              className={`group relative p-12 py-16 rounded-[48px] bg-white/70 backdrop-blur-md border-2 cursor-pointer transition-all duration-700 overflow-hidden flex flex-col items-center justify-center text-center min-h-[220px]
-                                ${isSelected 
-                                  ? 'border-brand-primary shadow-2xl shadow-brand-primary/10 bg-brand-primary/[0.02]' 
-                                  : 'border-black/[0.03] shadow-sm hover:border-black/10'}`}
+                              whileHover={isLocked ? {} : { y: -8, transition: { duration: 0.2 } }}
+                              whileTap={isLocked ? {} : { scale: 0.98 }}
+                              onClick={() => !isLocked && setSelectedExerciseId(ex.id)}
+                              className={`group relative p-12 py-16 rounded-[48px] backdrop-blur-md border-2 transition-all duration-700 overflow-hidden flex flex-col items-center justify-center text-center min-h-[220px]
+                                ${isLocked
+                                  ? 'bg-gray-100/50 border-black/[0.03] opacity-60 cursor-not-allowed'
+                                  : `bg-white/70 cursor-pointer ${isSelected 
+                                    ? 'border-brand-primary shadow-2xl shadow-brand-primary/10 bg-brand-primary/[0.02]' 
+                                    : 'border-black/[0.03] shadow-sm hover:border-black/10'}`
+                                }`}
                             >
                               {/* Background Large Number */}
                               <div className="absolute -bottom-10 left-1 text-[160px] font-black text-black/[0.02] pointer-events-none select-none tracking-tighter leading-none transition-all duration-700 group-hover:opacity-[0.05] group-hover:scale-110">
                                 {numStr}
                               </div>
 
+                              {/* Locked Overlay */}
+                              {isLocked && (
+                                <>
+                                  <div className="absolute top-6 right-6 flex items-center gap-2 bg-gray-200/80 backdrop-blur-sm px-3 py-1.5 rounded-full z-20">
+                                    <Lock size={11} className="text-gray-500" strokeWidth={3} />
+                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-500">Coming Soon</span>
+                                  </div>
+                                  {/* <div className="absolute inset-0 flex items-center justify-center z-10">
+                                    <Lock size={28} className="text-gray-300" strokeWidth={1.5} />
+                                  </div> */}
+                                </>
+                              )}
+
                               {/* Selection Indicator Glow */}
-                              {isSelected && (
+                              {!isLocked && isSelected && (
                                 <motion.div 
                                   layoutId="cardGlow"
                                   className="absolute inset-0 bg-brand-primary/5 blur-3xl"
@@ -767,19 +784,23 @@ export default function App() {
                               )}
 
                               {/* Top Left Hash Number */}
-                              <div className="absolute top-8 left-10 flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
-                                <span className="text-[10px] font-black text-brand-primary mt-1">#</span>
-                                <span className={`text-base font-black tracking-tighter ${isSelected ? 'text-brand-primary' : 'text-gray-400'}`}>{numStr}</span>
-                              </div>
-
-                              <div className={`absolute top-8 right-10 transition-all duration-500 ${isSelected ? 'scale-110 opacity-100' : 'scale-0 opacity-0'}`}>
-                                <div className="w-6 h-6 rounded-full bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/30">
-                                  <CircleCheckBig size={14} strokeWidth={3} />
+                              {!isLocked && (
+                                <div className="absolute top-8 left-10 flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
+                                  <span className="text-[10px] font-black text-brand-primary mt-1">#</span>
+                                  <span className={`text-base font-black tracking-tighter ${isSelected ? 'text-brand-primary' : 'text-gray-400'}`}>{numStr}</span>
                                 </div>
-                              </div>
+                              )}
+
+                              {!isLocked && (
+                                <div className={`absolute top-8 right-10 transition-all duration-500 ${isSelected ? 'scale-110 opacity-100' : 'scale-0 opacity-0'}`}>
+                                  <div className="w-6 h-6 rounded-full bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/30">
+                                    <CircleCheckBig size={14} strokeWidth={3} />
+                                  </div>
+                                </div>
+                              )}
 
                               <div className="relative z-10">
-                                <h3 className={`text-2xl font-black leading-tight transition-all duration-500 ${isSelected ? 'text-gray-900 scale-105' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                                <h3 className={`text-2xl font-black leading-tight transition-all duration-500 ${isLocked ? 'text-gray-300' : isSelected ? 'text-gray-900 scale-105' : 'text-gray-400 group-hover:text-gray-600'}`}>
                                   {ex.name}
                                 </h3>
                               </div>
