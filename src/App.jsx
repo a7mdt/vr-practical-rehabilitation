@@ -84,7 +84,9 @@ export default function App() {
     if (feedbackRef.current.text === text) return;
     feedbackRef.current = { text, type };
     setFeedback({ text, type });
-    if (type === 'error' || text.includes('achieved') || text.includes('counted') || text === 'Perfect!') speak(text);
+    // Speak all actionable feedback — errors (form corrections) AND good (coaching cues)
+    // Only skip 'neutral' messages which are passive status updates
+    if (type === 'error' || type === 'good') speak(text);
   };
 
   const onResults = (results) => {
@@ -264,6 +266,7 @@ export default function App() {
     const file = e.target.files[0];
     if (!file) return;
     setVideoSource('file');
+    resetSession();
     if (cameraRef.current) { cameraRef.current.stop(); cameraRef.current = null; }
     if (animationFrameId.current) { cancelAnimationFrame(animationFrameId.current); animationFrameId.current = null; }
 
@@ -276,6 +279,14 @@ export default function App() {
     canvas.style.transform = 'scaleX(1)';
     video.src = URL.createObjectURL(file);
     video.load();
+
+    // Start MediaPipe processing directly on the video element's play event
+    // instead of relying on React's onPlay which captures stale videoSource state
+    video.onplay = () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      processVideoFrames();
+    };
     video.oncanplay = () => video.play();
   };
 
