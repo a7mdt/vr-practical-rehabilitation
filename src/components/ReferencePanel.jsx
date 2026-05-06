@@ -39,6 +39,96 @@ const exerciseConfig = {
       'Push into the stretch at the end',
       'Extend fully between repetitions'
     ]
+  },
+  anklePump: {
+    videoId: 'hh_fsJOpFjQ',
+    tips: [
+      'Pull your toes up toward your shin as far as comfortable',
+      'Then point your toes away — full plantarflexion',
+      'Keep your leg still; only the foot moves',
+      'Move slowly and smoothly through the full range'
+      ]
+  },
+  clamshell: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Lie on your side with hips and knees stacked',
+      'Keep your feet together throughout the movement',
+      'Rotate your top knee toward the ceiling slowly',
+      'Do not let your hips roll backward'
+    ]
+  },
+  deadBug: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Keep your lower back pressed firmly to the floor',
+      'Lower opposite arm and leg together slowly',
+      'Breathe out steadily during the lowering phase',
+      'Return to start position with control'
+    ]
+  },
+  singleLegStand: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Lift one knee to hip height and hold for 2 seconds',
+      'Keep your trunk upright — do not lean sideways',
+      'Focus your gaze on a fixed point ahead of you',
+      'Engage your core and standing hip for stability'
+    ]
+  },
+  catCamel: {
+    videoId: '', // Placeholder: add clinical demo ID
+    tips: [
+      'Start on hands and knees with a neutral spine',
+      'Round your spine up toward the ceiling (Cat)',
+      'Arch your spine down and lift your head (Camel)',
+      'Move slowly through the full range of motion'
+    ]
+  },
+  birdDog: {
+    videoId: '',
+    tips: [
+      'Start on hands and knees with a flat back',
+      'Extend opposite arm and leg simultaneously',
+      'Hold the position for at least 2 seconds',
+      'Keep both shoulders level — do not rotate your trunk'
+    ]
+  },
+  pendulum: {
+    videoId: '',
+    tips: [
+      'Lean forward at the hip and let your arm hang freely',
+      'Swing your arm forward and backward like a pendulum',
+      'Keep your elbow straight — do not actively curl',
+      'Relax your shoulder and let gravity do the work'
+    ]
+  },
+  bridge: {
+    videoId: '',
+    tips: [
+      'Lie on your back with knees bent and feet flat',
+      'Press your feet into the floor and lift your hips',
+      'Squeeze your glutes at the top of the movement',
+      'Keep your knees aligned over your ankles throughout'
+    ]
+  },
+  quadSets: {
+    videoId: 'khUhNAq2Fzo',
+    tips: [
+      'Lie flat with your leg fully extended on the surface',
+      'Tighten your thigh muscle — press the back of your knee toward the floor',
+      'Hold the contraction for 5–10 seconds',
+      'Relax slowly, then repeat'
+    ]
+  },
+  straightLegRaise: {
+    videoId: 'U4L_6JEv9Jg',
+    tips: [
+      'Lie flat — bend the opposite knee for back support',
+      'Tighten your thigh to lock the knee fully straight before lifting',
+      'Raise your leg to roughly 45° (level with the opposite knee)',
+      'Lower slowly and under control — do not drop the leg'
+    ]
   }
 };
 
