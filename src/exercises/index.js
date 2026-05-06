@@ -2,6 +2,7 @@ import squats from './squats';
 import bicepCurls from './bicepCurls';
 import lunges from './lunges';
 import heelSlides from './heelSlides';
+import anklePump from './anklePump';
 import clamshell from './clamshell';
 import deadBug from './deadBug';
 import singleLegStand from './singleLegStand';
@@ -15,6 +16,7 @@ export const exercises = {
   bicepCurls,
   lunges,
   heelSlides,
+  anklePump,
   clamshell,
   deadBug,
   singleLegStand,

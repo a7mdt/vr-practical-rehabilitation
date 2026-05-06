@@ -1,4 +1,9 @@
 export const ROM_CONFIG = {
+  squats:     { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 100, startAngle: 165, normalRange: '≤ 100°' },
+  heelSlides: { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
+  bicepCurls: { primaryKey: 'elbow', label: 'Elbow Flexion',      targetAngle: 40,  startAngle: 165, normalRange: '≤ 40°'  },
+  lunges:     { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
+  anklePump:  { primaryKey: 'ankle', label: 'Ankle Dorsiflexion', targetAngle: 130, startAngle: 165, normalRange: '≤ 130°' },
   squats:     { primaryKey: 'knee', label: 'Knee Flexion', targetAngle: 100, startAngle: 165, normalRange: '≤ 100°' },
   heelSlides: { primaryKey: 'knee', label: 'Knee Flexion', targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
   bicepCurls: { primaryKey: 'elbow', label: 'Elbow Flexion', targetAngle: 40, startAngle: 165, normalRange: '≤ 40°' },
@@ -37,7 +42,13 @@ const DIAGNOSES = {
     { minScore: 40, status: 'moderate', label: 'Moderate Restriction',   advice: 'Reduce step length. Focus on controlled descent. Check hip extension ROM on the lunge side.' },
     { minScore: 0,  status: 'severe',   label: 'Severe Restriction',     advice: 'Do not advance depth. Revert to stationary exercises and review with therapist.' },
   ],
-  clamshell: [
+  anklePump: [
+    { minScore: 88, status: 'optimal',  label: 'Full ROM',              advice: 'Full ankle dorsiflexion achieved. Good circulatory and mobility response. Progress to standing calf raises when appropriate.' },
+    { minScore: 65, status: 'mild',     label: 'Mild Restriction',       advice: 'Slight dorsiflexion limitation — common post-surgically or with prolonged immobilisation. Continue gentle pumping and add towel stretching at end range.' },
+    { minScore: 40, status: 'moderate', label: 'Moderate Restriction',   advice: 'Moderate restriction. Assess for oedema, posterior capsule tightness, or Achilles involvement. Consider manual mobilisation before exercises.' },
+    { minScore: 0,  status: 'severe',   label: 'Severe Restriction',     advice: 'Severely limited dorsiflexion. May indicate significant swelling, joint stiffness, or surgical complication. Suspend and arrange immediate therapist review.' },
+  ],
+    clamshell: [
     { minScore: 88, status: 'optimal',  label: 'Full Hip Abduction',    advice: 'Excellent gluteus medius activation. Progress to resistance band.' },
     { minScore: 65, status: 'mild',     label: 'Partial Abduction',     advice: 'Moderate range. Focus on slow controlled opening phase.' },
     { minScore: 40, status: 'moderate', label: 'Limited Abduction',     advice: 'Restricted hip abduction. Assess TFL and hip capsule tightness.' },

@@ -38,6 +38,15 @@ const exerciseConfig = {
       'Extend fully between repetitions'
     ]
   },
+  anklePump: {
+    videoId: 'hh_fsJOpFjQ',
+    tips: [
+      'Pull your toes up toward your shin as far as comfortable',
+      'Then point your toes away — full plantarflexion',
+      'Keep your leg still; only the foot moves',
+      'Move slowly and smoothly through the full range'
+      ]
+  },
   clamshell: {
     videoId: '', // Placeholder: add clinical demo ID
     tips: [
