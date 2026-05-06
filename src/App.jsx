@@ -143,6 +143,7 @@ export default function App() {
     setFeedback({ text, type });
     if (
       type === "error" ||
+      type === 'good'||
       text.includes("achieved") ||
       text.includes("counted") ||
       text === "Perfect!"
@@ -432,15 +433,10 @@ export default function App() {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setVideoSource("file");
-    if (cameraRef.current) {
-      cameraRef.current.stop();
-      cameraRef.current = null;
-    }
-    if (animationFrameId.current) {
-      cancelAnimationFrame(animationFrameId.current);
-      animationFrameId.current = null;
-    }
+    setVideoSource('file');
+    resetSession();
+    if (cameraRef.current) { cameraRef.current.stop(); cameraRef.current = null; }
+    if (animationFrameId.current) { cancelAnimationFrame(animationFrameId.current); animationFrameId.current = null; }
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
@@ -451,7 +447,15 @@ export default function App() {
     canvas.style.transform = "scaleX(1)";
     video.src = URL.createObjectURL(file);
     video.load();
-    video.oncanplay = () => {
+
+    // Start MediaPipe processing directly on the video element's play event
+    // instead of relying on React's onPlay which captures stale videoSource state
+    video.onplay = () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      processVideoFrames();
+    };
+   video.oncanplay = () => {
       video.play();
       setHasStream(true);
     };

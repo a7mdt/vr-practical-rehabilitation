@@ -4,6 +4,7 @@ let internalStage = 'NEUTRAL';
 let prevAngle = null;
 let lumbarFailed = false;
 let hipY_baseline = null;
+let lastResetId = null;
 
 export default {
   id: 'deadBug',
@@ -21,12 +22,19 @@ export default {
     { name: 'Leg', points: ['leftShoulder', 'leftHip', 'leftAnkle'], target: 150 }
   ],
   analyze(landmarks, currentStage) {
-    if (currentStage === 'UP') {
-      internalStage = 'NEUTRAL';
+    // Reset internal state when exercise restarts (stage externally set to UP)
+    // Only reset once to avoid fighting with the App's state management
+    if (currentStage === 'UP' && internalStage !== 'NEUTRAL') {
+      if (lastResetId !== currentStage) {
+        internalStage = 'NEUTRAL';
+        lumbarFailed = false;
+        hipY_baseline = null;
+        lastResetId = currentStage;
+      }
     }
 
     const required = [11, 13, 15, 23, 25, 27];
-    const allVisible = required.every(i => landmarks[i]?.visibility > 0.35);
+    const allVisible = required.every(i => landmarks[i]?.visibility > 0.3);
 
     if (!allVisible) {
       return {
@@ -41,12 +49,14 @@ export default {
       };
     }
 
+    // Hip-Shoulder-Wrist: measures arm extension away from torso
     const armAngle = calculateAngle(
       landmarks[23],  // leftHip
       landmarks[11],  // leftShoulder
       landmarks[15]   // leftWrist
     );
 
+    // Shoulder-Hip-Ankle: measures leg extension away from torso
     const legAngle = calculateAngle(
       landmarks[11],  // leftShoulder
       landmarks[23],  // leftHip
@@ -61,20 +71,25 @@ export default {
     let isGoodRep = false;
 
     if (internalStage === 'NEUTRAL') {
-
+      // Capture the hip baseline for lumbar stability tracking
       hipY_baseline = landmarks[23].y;
 
-      if (armAngle > 140 && legAngle > 140) {
+      // Enter LOWER when arm and leg are extended away from body
+      // Relaxed from 140° to 120° — Dead Bug starts with limbs up, and extending
+      // them away from center produces larger angles at shoulder/hip
+      if (armAngle > 120 && legAngle > 120) {
         internalStage = 'LOWER';
         mappedStage = 'DOWN';
         lumbarFailed = false;
+        lastResetId = null;
         feedback = { text: 'Extension achieved — keep lowering steadily', type: 'good' };
       }
     } else if (internalStage === 'LOWER') {
-
+      // Lumbar stability check: hip shouldn't shift vertically
+      // Relaxed from 0.05 to 0.07 to tolerate minor camera/body sway
       if (hipY_baseline !== null) {
         const lumbarShift = Math.abs(landmarks[23].y - hipY_baseline);
-        if (lumbarShift > 0.05) {
+        if (lumbarShift > 0.07) {
           lumbarFailed = true;
           feedback = { text: 'Keep your lower back pressed to the floor', type: 'error' };
         } else {
@@ -82,8 +97,9 @@ export default {
         }
       }
 
-
-      if (armAngle < 110 && legAngle < 110) {
+      // Rep completes when limbs return toward center (angles decrease)
+      // Relaxed from <110 to <100 for arm and <115 for leg
+      if (armAngle < 100 && legAngle < 115) {
         if (!lumbarFailed) {
           isGoodRep = true;
           feedback = { text: 'Clinical target achieved. Rep counted.', type: 'good' };
